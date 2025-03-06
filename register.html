@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>REGISTER</h1>
+        <table id="register-table">
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <a href="index.html" class="register-link">Back to Planner</a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let savedData = JSON.parse(localStorage.getItem("dailyPlanner"));
+            let tableBody = document.querySelector("#register-table tbody");
+
+            if (savedData) {
+                Object.keys(savedData).forEach(key => {
+                    let row = document.createElement("tr");
+                    row.innerHTML = `<td>${key.replace(/_/g, ' ')}</td><td>${savedData[key]}</td>`;
+                    tableBody.appendChild(row);
+                });
+            } else {
+                tableBody.innerHTML = "<tr><td colspan='2'>No data available</td></tr>";
+            }
+        });
+    </script>
+
+</body>
+</html>
